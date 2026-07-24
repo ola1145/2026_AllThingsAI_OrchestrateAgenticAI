@@ -55,6 +55,7 @@
       border-left-width: 4px; transition: opacity .15s;
     }
     .issue-card:hover { opacity: .9; }
+    .issue-card:focus-visible { outline: 2px solid #6366f1; outline-offset: 2px; }
     .issue-meta { display: flex; justify-content: space-between; margin-bottom: 8px; }
     .sev-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; letter-spacing: .08em; }
     .cat-badge { font-size: 10px; color: #64748b; background: #0f172a; padding: 2px 8px; border-radius: 4px; }
@@ -125,18 +126,18 @@
   </div>
 
   <!-- Tabs -->
-  <div class="tabs">
-    <button class="tab-btn" onclick="switchTab('issues')">Issues (15)</button>
-    <button class="tab-btn" onclick="switchTab('tokens')">Token Usage</button>
-    <button class="tab-btn active" onclick="switchTab('files')">File Coverage</button>
-    <button class="tab-btn" onclick="switchTab('risks')">Context Risks</button>
+  <div class="tabs" role="tablist" aria-label="Analysis Tabs">
+    <button class="tab-btn" id="tab-issues" role="tab" aria-selected="false" aria-controls="panel-issues" onclick="switchTab('issues')">Issues (15)</button>
+    <button class="tab-btn" id="tab-tokens" role="tab" aria-selected="false" aria-controls="panel-tokens" onclick="switchTab('tokens')">Token Usage</button>
+    <button class="tab-btn active" id="tab-files" role="tab" aria-selected="true" aria-controls="panel-files" onclick="switchTab('files')">File Coverage</button>
+    <button class="tab-btn" id="tab-risks" role="tab" aria-selected="false" aria-controls="panel-risks" onclick="switchTab('risks')">Context Risks</button>
   </div>
 
   <!-- Panels -->
-  <div id="panel-issues" class="panel"></div>
-  <div id="panel-tokens" class="panel"></div>
-  <div id="panel-files"  class="panel active"></div>
-  <div id="panel-risks"  class="panel"></div>
+  <div id="panel-issues" class="panel" role="tabpanel" aria-labelledby="tab-issues"></div>
+  <div id="panel-tokens" class="panel" role="tabpanel" aria-labelledby="tab-tokens"></div>
+  <div id="panel-files"  class="panel active" role="tabpanel" aria-labelledby="tab-files"></div>
+  <div id="panel-risks"  class="panel" role="tabpanel" aria-labelledby="tab-risks"></div>
 
   <p class="footer">RFP 20-020 · Indiana Department of Administration · Personal Property Tax Online Filing System · Naive context-buffer analysis</p>
 </div>
@@ -229,19 +230,32 @@ const SEV_BG    = { High:"#1f0a0a", Medium:"#1a0d00", Low:"#1a1a00" };
   el.innerHTML = `<div class="issues-grid">${issues.map((iss,i)=>`
     <div class="issue-card" id="iss-${i}"
          style="border-color:${SEV_COLOR[iss.sev]}44;border-left-color:${SEV_COLOR[iss.sev]}"
-         onclick="toggleIssue(${i})">
+         tabindex="0" role="button" aria-expanded="false"
+         aria-label="${iss.title} - Severity ${iss.sev} - ${iss.cat}"
+         onclick="toggleIssue(${i})"
+         onkeydown="handleIssueKey(event, ${i})">
       <div class="issue-meta">
         <span class="sev-badge" style="background:${SEV_COLOR[iss.sev]}22;color:${SEV_COLOR[iss.sev]}">${iss.sev.toUpperCase()}</span>
         <span class="cat-badge">${iss.cat}</span>
       </div>
       <div class="issue-title">${iss.title}</div>
       <div class="issue-detail">${iss.detail}</div>
-      <div class="issue-hint">Click to expand ↓</div>
+      <div class="issue-hint">Click or press Enter/Space to expand ↓</div>
     </div>`).join("")}</div>`;
 })();
 
 function toggleIssue(i){
-  document.getElementById("iss-"+i).classList.toggle("open");
+  const card = document.getElementById("iss-"+i);
+  card.classList.toggle("open");
+  const isOpen = card.classList.contains("open");
+  card.setAttribute("aria-expanded", isOpen ? "true" : "false");
+}
+
+function handleIssueKey(event, i){
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    toggleIssue(i);
+  }
 }
 
 // ─── TOKENS PANEL ─────────────────────────────────────────────────────────────
@@ -508,9 +522,16 @@ function drawFileChart(){
 
 function switchTab(id){
   document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
-  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+  document.querySelectorAll(".tab-btn").forEach(b=>{
+    b.classList.remove("active");
+    b.setAttribute("aria-selected", "false");
+  });
   document.getElementById("panel-"+id).classList.add("active");
-  event.currentTarget.classList.add("active");
+  const activeBtn = document.getElementById("tab-"+id);
+  if (activeBtn) {
+    activeBtn.classList.add("active");
+    activeBtn.setAttribute("aria-selected", "true");
+  }
 
   if (id === "tokens") drawTokenChart();
   if (id === "files")  drawFileChart();
