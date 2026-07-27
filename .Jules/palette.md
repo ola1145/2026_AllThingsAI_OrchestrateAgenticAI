@@ -1,0 +1,3 @@
+## 2026-07-27 - Focus Indicator Styling for Dark Theme Blueprint Slide Embeds
+**Learning:** Embedded interactive web explainer pages in Reveal.js slides require customized high-contrast `:focus-visible` styles matching the presentation's color scheme (e.g., gold outline for wildclouds theme) to ensure keyboard navigation is visible and accessible without breaking the aesthetic.
+**Action:** Always add high-contrast `:focus-visible` outline rings to interactive elements (TOC links, summary blocks, and buttons) when embedding explainer pages or building custom slide layouts, and ensure no misplaced markup is present inside CSS blocks which can cause silent style parse failure in browsers.
