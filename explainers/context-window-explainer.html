@@ -69,6 +69,15 @@
   /* ============ RESET ============ */
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  /* ============ FOCUS STATES ============ */
+  a:focus-visible,
+  summary:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
   body {
     background: var(--bg);
     background-image:
@@ -646,7 +655,6 @@
 
   /* Type badges */
   .type-badge {
-              <td><em>All of Harry Potter + LOTR</em></td>
     font-family: var(--font-mono);
     font-size: 10px;
     padding: 2px 7px;
@@ -1025,7 +1033,7 @@
         <div class="compact-step__desc">Old file reads, bash outputs, and search results are removed first &mdash; they're the biggest and least relevant</div>
       </div>
       <div class="compact-arrow">
-        <svg viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg>
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg>
       </div>
       <div class="compact-step">
         <div class="compact-step__num">Phase 2</div>
@@ -1033,7 +1041,7 @@
         <div class="compact-step__desc">Claude summarizes the conversation into a shorter narrative, keeping key decisions and code changes</div>
       </div>
       <div class="compact-arrow">
-        <svg viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg>
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></svg>
       </div>
       <div class="compact-step">
         <div class="compact-step__num">Phase 3</div>
