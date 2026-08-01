@@ -1,0 +1,5 @@
+# Palette's Journal
+
+## 2026-08-01 - Keyboard Focus in Embedded Presentation iFrames & Custom Elements
+**Learning:** iFrames embedded as slides in Reveal.js presentations do not automatically propagate or visually surface keyboard focus correctly unless custom focus styles are set. Default browser outlines on nested elements within iframes are often clipped by parents using `overflow: hidden` or custom themes, hiding the active selection from keyboard-only users. Furthermore, using non-semantic interactive components (like custom `div` issue cards) without `tabindex`, keyboard event listeners, and proper ARIA states fully locks out assistive technologies.
+**Action:** Always provide explicit, high-contrast `:focus-visible` outline styles with appropriate `outline-offset` to keep indicators visible and beautifully integrated with the presentation theme. Convert any non-semantic interactive wrappers using `tabindex="0"`, `role="button"`, and dynamic `aria-expanded` attributes, coupled with `keydown` listeners supporting both the `Enter` and `Space` keys.
