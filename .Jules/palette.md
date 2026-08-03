@@ -1,0 +1,3 @@
+## 2026-08-03 - Nested Iframe Focus States in Presentation Slides
+**Learning:** Interactive web explainers embedded as background iframes inside presentation slides (like Reveal.js) frequently lose default focus indicators or make them hard to see. For custom interactive elements (like clickable divs), adding `tabindex="0"` and keyboard keypress listeners (for both `Enter` and `Space`) is essential. Using `:focus-visible` ensures high-visibility focus indicators only trigger when navigating via the keyboard, keeping pointer interactions clean.
+**Action:** Always add tabindex="0", keydown listeners, and distinct, theme-matching outline/offset focus styles with `:focus-visible` on nested iframe components.
