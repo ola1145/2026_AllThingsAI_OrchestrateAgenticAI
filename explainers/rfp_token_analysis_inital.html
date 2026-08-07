@@ -41,6 +41,10 @@
       border-radius: 6px; padding: 8px 18px; cursor: pointer; font-size: 13px;
       font-weight: 500; transition: all .15s;
     }
+    .tab-btn:focus-visible {
+      outline: 2px solid #6366f1;
+      outline-offset: 2px;
+    }
     .tab-btn.active { background: #6366f1; color: white; border-color: #6366f1; }
 
     /* ── panels ── */
@@ -53,6 +57,10 @@
       background: #1e293b; border-radius: 8px; padding: 14px;
       cursor: pointer; border: 1px solid transparent;
       border-left-width: 4px; transition: opacity .15s;
+    }
+    .issue-card:focus-visible {
+      outline: 2px solid #6366f1;
+      outline-offset: 2px;
     }
     .issue-card:hover { opacity: .9; }
     .issue-meta { display: flex; justify-content: space-between; margin-bottom: 8px; }
@@ -229,19 +237,25 @@ const SEV_BG    = { High:"#1f0a0a", Medium:"#1a0d00", Low:"#1a1a00" };
   el.innerHTML = `<div class="issues-grid">${issues.map((iss,i)=>`
     <div class="issue-card" id="iss-${i}"
          style="border-color:${SEV_COLOR[iss.sev]}44;border-left-color:${SEV_COLOR[iss.sev]}"
-         onclick="toggleIssue(${i})">
+         tabindex="0"
+         role="button"
+         aria-expanded="false"
+         onclick="toggleIssue(${i})"
+         onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleIssue(${i}); }">
       <div class="issue-meta">
         <span class="sev-badge" style="background:${SEV_COLOR[iss.sev]}22;color:${SEV_COLOR[iss.sev]}">${iss.sev.toUpperCase()}</span>
         <span class="cat-badge">${iss.cat}</span>
       </div>
       <div class="issue-title">${iss.title}</div>
       <div class="issue-detail">${iss.detail}</div>
-      <div class="issue-hint">Click to expand ↓</div>
+      <div class="issue-hint">Click or press Enter/Space to expand ↓</div>
     </div>`).join("")}</div>`;
 })();
 
 function toggleIssue(i){
-  document.getElementById("iss-"+i).classList.toggle("open");
+  const card = document.getElementById("iss-"+i);
+  const isOpen = card.classList.toggle("open");
+  card.setAttribute("aria-expanded", isOpen ? "true" : "false");
 }
 
 // ─── TOKENS PANEL ─────────────────────────────────────────────────────────────
