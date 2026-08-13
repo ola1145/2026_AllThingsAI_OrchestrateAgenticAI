@@ -1,0 +1,5 @@
+# Palette Journal - Critical UX & Accessibility Learnings
+
+## 2026-08-13 - Focus Visibility and Keyboard Triggers for Custom Elements
+**Learning:** Embedded interactive HTML pages within slide presentation iframes require extra care for keyboard navigation. Custom clickables (like `div` elements representing accordion headers or cards) are completely invisible to screen readers and keyboard tab indexing unless explicitly declared with semantic roles, correct tab order (`tabindex="0"`), dynamic ARIA attributes (`aria-expanded`), and explicit keyboard event key listeners (listening for `Enter` and `Space`). Additionally, default browser focus outlines are often low-contrast or hidden inside dark-theme containers, demanding custom `:focus-visible` styles to preserve focus visibility.
+**Action:** When designing custom clickables, always accompany `onclick` handlers with `tabindex="0"`, `role="button"`, and appropriate ARIA attributes. Implement keydown handlers listening for both `Enter` and `Space`. Pair hover states with matching high-contrast `:focus-visible` outline styles on all interactive elements to ensure seamless focus tracking.
