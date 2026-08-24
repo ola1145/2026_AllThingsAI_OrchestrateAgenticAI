@@ -1,0 +1,3 @@
+## 2026-08-24 - Focus-Visible Indicators in Dark Blueprint Theme Explainers
+**Learning:** Standalone HTML explainers with dark blueprint themes (`var(--bg): #0c1220`) hide native browser focus outlines on interactive `<summary>` collapsible triggers and navigation links (`.toc a`), breaking keyboard accessibility for slide-embedded web components.
+**Action:** Always apply explicit `:focus-visible` outline rings with theme accent colors (e.g., `outline: 2px solid var(--gold); outline-offset: 2px;`) alongside descriptive `aria-label` attributes to ensure keyboard navigation remains clearly visible and accessible.
