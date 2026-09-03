@@ -1,0 +1,3 @@
+## 2026-03-31 - Div-based Expandable Components in Dark Embedded Explainers
+**Learning:** Embedded explainer HTML cards inside Reveal.js slides often use custom `div` elements with click handlers for expanding details, rendering them completely inaccessible to keyboard and screen reader users unless `role="button"`, `tabindex="0"`, `aria-expanded`, and `:focus-visible` ring styles are explicitly defined.
+**Action:** When auditing embedded web explainers, check all custom interactive elements for `tabindex="0"`, `role="button"`, `aria-expanded` attributes, keyboard handlers (`Enter`/`Space`), and high-contrast `:focus-visible` outlines.
