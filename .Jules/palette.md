@@ -1,0 +1,3 @@
+## 2026-09-07 - Accessible Interactive Explainers in Slide Presentations
+**Learning:** Custom HTML explainers embedded as iframe backgrounds in presentation slides often use `<div>`-based interactive components (like tabs or expandable accordion cards) without keyboard focus (`tabindex="0"`), ARIA expanded/selected attributes, or keyboard listeners. This makes interactive presentation materials completely unusable for keyboard or screen reader users.
+**Action:** Always verify custom interactive HTML components in `explainers/` or slide embeds have `tabindex="0"`, proper ARIA roles (`role="button"`, `role="tab"`), `aria-expanded`/`aria-selected` attributes, Enter/Space keydown handlers, and explicit `:focus-visible` outline styling.
