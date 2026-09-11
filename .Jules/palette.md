@@ -1,0 +1,3 @@
+## 2026-03-28 - Focus Visible States in Embedded Iframes
+**Learning:** Interactive components in standalone HTML explainers embedded as iframes inside Reveal.js slides (such as `<summary>` tags and sidebar table-of-contents links) often lack browser default focus outlines due to custom CSS resets. Without explicit `:focus-visible` styles matching the theme color tokens, keyboard navigation loses focus indicators when tabbing through iframe content.
+**Action:** Always verify interactive controls (`<a>`, `<summary>`, `<button>`) in `explainers/*.html` have explicit `:focus-visible` styling using design tokens (e.g., `var(--gold)`).
