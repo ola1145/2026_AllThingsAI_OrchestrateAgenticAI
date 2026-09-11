@@ -178,6 +178,11 @@
   }
   .toc a:hover { color: var(--text); background: var(--surface2); }
   .toc a.active { color: var(--gold); border-left-color: var(--gold); }
+  .toc a:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+    color: var(--text);
+  }
 
   /* ============ TYPOGRAPHY ============ */
   h1 {
@@ -799,6 +804,10 @@
     transition: background 0.15s;
   }
   details.collapsible summary:hover { background: var(--surface-elevated); }
+  details.collapsible summary:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: -2px;
+  }
   details.collapsible summary::-webkit-details-marker { display: none; }
   details.collapsible summary::before {
     content: '\25B8';
