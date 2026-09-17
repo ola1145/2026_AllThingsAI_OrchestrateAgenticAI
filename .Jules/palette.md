@@ -1,0 +1,3 @@
+## 2026-03-17 - Focus Indicators and ARIA Labels in Embedded Presentation Explainers
+**Learning:** Embedded interactive HTML explainers loaded inside presentation slide decks (e.g. Reveal.js iframes) often lack `:focus-visible` outline styles and landmark ARIA attributes. Providing custom `:focus-visible` rings matching theme colors ensures accessible keyboard navigation without breaking visual aesthetics.
+**Action:** Always include explicit `:focus-visible` styles on interactive elements (`<a>`, `<summary>`, `<button>`) and landmark `aria-label` attributes on `<nav>` tags in standalone HTML explainer components.
