@@ -177,6 +177,7 @@
     margin-bottom: 1px;
   }
   .toc a:hover { color: var(--text); background: var(--surface2); }
+  .toc a:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; color: var(--text); }
   .toc a.active { color: var(--gold); border-left-color: var(--gold); }
 
   /* ============ TYPOGRAPHY ============ */
@@ -646,7 +647,6 @@
 
   /* Type badges */
   .type-badge {
-              <td><em>All of Harry Potter + LOTR</em></td>
     font-family: var(--font-mono);
     font-size: 10px;
     padding: 2px 7px;
@@ -799,6 +799,7 @@
     transition: background 0.15s;
   }
   details.collapsible summary:hover { background: var(--surface-elevated); }
+  details.collapsible summary:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
   details.collapsible summary::-webkit-details-marker { display: none; }
   details.collapsible summary::before {
     content: '\25B8';
@@ -883,7 +884,7 @@
 
 <div class="wrap">
 
-  <nav class="toc" id="toc">
+  <nav class="toc" id="toc" aria-label="Table of Contents">
     <div class="toc-title">Contents</div>
     <a href="#s1">Anatomy</a>
     <a href="#s2">Not Embeddings</a>
@@ -1358,7 +1359,7 @@
       </div>
     </details>
 
-    <div class="callout animate" style="--i:29" style="margin-top:12px">
+    <div class="callout animate" style="--i:29; margin-top:12px">
       <strong>The trend:</strong> Context windows have grown 100x in two years (8K &rarr; 2M), but the architecture hasn't changed &mdash; it's still raw tokens, full attention, and lossy compaction. The tooling around managing that window (CLAUDE.md, <code>/compact</code>, hooks, subagents) matters as much as the window size itself.
     </div>
 
