@@ -42,6 +42,7 @@
       font-weight: 500; transition: all .15s;
     }
     .tab-btn.active { background: #6366f1; color: white; border-color: #6366f1; }
+    .tab-btn:focus-visible { outline: 2px solid #818cf8; outline-offset: 2px; }
 
     /* ── panels ── */
     .panel { display: none; }
@@ -55,6 +56,7 @@
       border-left-width: 4px; transition: opacity .15s;
     }
     .issue-card:hover { opacity: .9; }
+    .issue-card:focus-visible { outline: 2px solid #818cf8; outline-offset: 2px; }
     .issue-meta { display: flex; justify-content: space-between; margin-bottom: 8px; }
     .sev-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; letter-spacing: .08em; }
     .cat-badge { font-size: 10px; color: #64748b; background: #0f172a; padding: 2px 8px; border-radius: 4px; }
@@ -227,21 +229,24 @@ const SEV_BG    = { High:"#1f0a0a", Medium:"#1a0d00", Low:"#1a1a00" };
 (function buildIssues(){
   const el = document.getElementById("panel-issues");
   el.innerHTML = `<div class="issues-grid">${issues.map((iss,i)=>`
-    <div class="issue-card" id="iss-${i}"
+    <div class="issue-card" id="iss-${i}" tabindex="0" role="button" aria-expanded="false"
          style="border-color:${SEV_COLOR[iss.sev]}44;border-left-color:${SEV_COLOR[iss.sev]}"
-         onclick="toggleIssue(${i})">
+         onclick="toggleIssue(${i})"
+         onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleIssue(${i});}">
       <div class="issue-meta">
         <span class="sev-badge" style="background:${SEV_COLOR[iss.sev]}22;color:${SEV_COLOR[iss.sev]}">${iss.sev.toUpperCase()}</span>
         <span class="cat-badge">${iss.cat}</span>
       </div>
       <div class="issue-title">${iss.title}</div>
       <div class="issue-detail">${iss.detail}</div>
-      <div class="issue-hint">Click to expand ↓</div>
+      <div class="issue-hint">Click or press Enter to expand ↓</div>
     </div>`).join("")}</div>`;
 })();
 
 function toggleIssue(i){
-  document.getElementById("iss-"+i).classList.toggle("open");
+  const el = document.getElementById("iss-"+i);
+  const isOpen = el.classList.toggle("open");
+  el.setAttribute("aria-expanded", isOpen);
 }
 
 // ─── TOKENS PANEL ─────────────────────────────────────────────────────────────
