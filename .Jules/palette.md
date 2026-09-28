@@ -1,0 +1,3 @@
+## 2025-05-18 - CSS Syntax Errors & Keyboard Focus in Embedded Explainers
+**Learning:** Embedded HTML explainers can silently break styling (like type badges) when stray HTML markup gets pasted inside CSS `<style>` blocks. Additionally, interactive TOC links and `<details><summary>` elements in standalone dark-mode explainers require explicit `:focus-visible` outlines to ensure keyboard navigation accessibility.
+**Action:** Always validate CSS syntax in embedded HTML explainers and ensure interactive links and expandable summaries feature clear `:focus-visible` focus rings (`outline: 2px solid var(--gold)`).
