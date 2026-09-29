@@ -42,6 +42,10 @@
       font-weight: 500; transition: all .15s;
     }
     .tab-btn.active { background: #6366f1; color: white; border-color: #6366f1; }
+    .tab-btn:focus-visible, .issue-card:focus-visible {
+      outline: 2px solid #818cf8;
+      outline-offset: 2px;
+    }
 
     /* ── panels ── */
     .panel { display: none; }
@@ -227,9 +231,10 @@ const SEV_BG    = { High:"#1f0a0a", Medium:"#1a0d00", Low:"#1a1a00" };
 (function buildIssues(){
   const el = document.getElementById("panel-issues");
   el.innerHTML = `<div class="issues-grid">${issues.map((iss,i)=>`
-    <div class="issue-card" id="iss-${i}"
+    <div class="issue-card" id="iss-${i}" tabindex="0" role="button" aria-expanded="false"
          style="border-color:${SEV_COLOR[iss.sev]}44;border-left-color:${SEV_COLOR[iss.sev]}"
-         onclick="toggleIssue(${i})">
+         onclick="toggleIssue(${i})"
+         onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleIssue(${i});}">
       <div class="issue-meta">
         <span class="sev-badge" style="background:${SEV_COLOR[iss.sev]}22;color:${SEV_COLOR[iss.sev]}">${iss.sev.toUpperCase()}</span>
         <span class="cat-badge">${iss.cat}</span>
@@ -241,7 +246,9 @@ const SEV_BG    = { High:"#1f0a0a", Medium:"#1a0d00", Low:"#1a1a00" };
 })();
 
 function toggleIssue(i){
-  document.getElementById("iss-"+i).classList.toggle("open");
+  const card = document.getElementById("iss-"+i);
+  const isOpen = card.classList.toggle("open");
+  card.setAttribute("aria-expanded", isOpen ? "true" : "false");
 }
 
 // ─── TOKENS PANEL ─────────────────────────────────────────────────────────────
