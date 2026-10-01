@@ -1,0 +1,3 @@
+## 2026-10-01 - Keyboard Navigability & ARIA Roles for Interactive Cards in HTML Explainers
+**Learning:** In standalone HTML explainer pages embedded in slide decks, custom clickable `div` components (e.g., issue cards) are invisible to screen readers as buttons and unreachable via keyboard navigation unless explicitly given `tabindex="0"`, `role="button"`, dynamic `aria-expanded` state tracking, and keydown listeners for Enter/Space.
+**Action:** When adding interactive cards or expandables in explainer UI pages, always pair click handlers with `tabindex="0"`, `role="button"`, `aria-expanded`, `:focus-visible` CSS rules, and Enter/Space keyboard handlers.
