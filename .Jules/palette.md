@@ -1,0 +1,3 @@
+## 2026-03-30 - Accessible Keyboard Navigation in Slide Explainer IFrames
+**Learning:** Interactive web explainers embedded as iframe slides inside presentation frameworks (like Reveal.js) often contain custom `div`-based components (e.g. issue cards, accordions) with `onclick` handlers. Without explicit keyboard semantics (`tabindex="0"`, `role="button"`, `aria-expanded`, `onkeydown` for Enter/Space), presentation viewers and screen reader users are completely unable to focus or trigger these interactive elements via keyboard.
+**Action:** Ensure all interactive custom components in HTML explainers include proper keyboard focusability, ARIA attributes, keydown listeners, and `:focus-visible` styles.
