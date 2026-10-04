@@ -1,0 +1,3 @@
+## 2026-10-04 - Visual Focus & CSS Syntax Integrity in HTML Explainers
+**Learning:** Interactive `<details>` summary elements and navigation links in standalone HTML explainers default to browser-standard outline styles that are often invisible against dark blueprint themes. Explicit `:focus-visible` ring indicators ensure keyboard accessibility when embedded in presentation slides. Additionally, malformed code snippets inside `<style>` blocks silently invalidate CSS rules without generating build errors.
+**Action:** Always verify `:focus-visible` states with keyboard navigation (Tab key) and validate `<style>` block contents when modifying standalone explainer HTML files.
