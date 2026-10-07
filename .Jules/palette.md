@@ -1,0 +1,3 @@
+## 2026-10-07 - Interactive Explainer Cards Keyboard Accessibility
+**Learning:** In standalone interactive HTML/JS explainer decks embedded as presentation slides, custom clickable `<div>` components (e.g. expandable cards) lack native button semantics and are skipped during Tab navigation unless explicitly given `tabindex="0"`, `role="button"`, `aria-expanded`, and keyboard event handlers (`Enter`/`Space`).
+**Action:** When building interactive card components in standalone HTML explainers, always include `tabindex="0"`, `role="button"`, `aria-expanded`, keydown event listener for Enter/Space, and explicit `:focus-visible` ring styling.
